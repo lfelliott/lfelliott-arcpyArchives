@@ -3,9 +3,11 @@
 # Created on: 2012-07-25 09:35:54.00000
 # export multiple fields within poly to raster python script
 # Ronnie Lee
-
+import sys
+import os
 import arcpy
-env.workspace = sys.path[0]
+arcpy.env.workspace = sys.path[0]
+arcpy.env.overwriteOutput = True
 polygons = "tm_objects_3.shp"
 fieldList = arcpy.ListFields(polygons)
 for field in fieldList:
