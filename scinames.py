@@ -19,7 +19,7 @@ for line in source:
 			#print species
 			#print line2
 			#print cname
-			outline = line2 + "|" + cname + "\n"
+			outline = line2 + "|" + cname + "\n"Init
 			outfile.write(outline)
 	source2.close()
 source.close()
