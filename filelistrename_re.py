@@ -1,7 +1,7 @@
 import os
 import re
 currentdir = os.getcwd()
-searchstr = re.compile(r'mapunit_(\d{2}).dbf$')
+searchstr = re.compile(r'mapunit_(\d{1,2}).dbf$')
 filelist = []
 for filename in os.listdir(currentdir):
 	m1 = searchstr.match(filename)
