@@ -8,7 +8,7 @@ infile.close()
 p1 = re.compile(r'\d+\D+')
 p2 = re.compile(r'^(\d+)(.+)')
 evtlist = p1.findall(line)
-outfile.write("\"code\",\"name\"\n")
+outfile.write("\"code\",\"name\"\nTak")
 for item in evtlist:
 #	print item
 	m = p2.search(item)
