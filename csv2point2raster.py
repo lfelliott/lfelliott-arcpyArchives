@@ -13,7 +13,7 @@ def elapsed_time(t0):
 overallstart = time()
 	
 currentdir = os.getcwd()
-#arcpy.env.workspace = "test.gdb"
+rasterdir = currentdir + "\\Raster"
 searchstr = re.compile(r'(.+)?\.csv$')
 filelist = []
 
@@ -45,4 +45,6 @@ for fname in filelist:
 	arcpy.PointToRaster_conversion(gdb_output, "landfacet", raster_file, "MOST_FREQUENT", "NONE", "30")
 	print "...raster made"
 	print "process time = " + elapsed_time(starttime)
+arcpy.MosaicToNewRaster_management("'Raster\\bmc_rast';'Raster\\clm_rast';'Raster\\eos_rast';'Raster\\gslunk_rast';'Raster\\qoa_rast';'Raster\\qya_rast';'Raster\\shl_rast';'Raster\\slm_rast';'Raster\\snd_rast'", rasterdir, "landfacet3.img", UTM12N_PROJ, "8_BIT_UNSIGNED", "30", "1", "LAST", "FIRST")
+print "Rasters merged"
 print "OVERALL ELAPSED: " + elapsed_time(overallstart)
