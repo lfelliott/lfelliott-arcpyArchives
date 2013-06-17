@@ -86,7 +86,8 @@ if __name__ == "__main__":
 	outfile.write("\"Filename\", lat, long\n")
 	for image in filelist:
 		exif_data = get_exif_data(image)
-		llstr = get_lat_lon(exif_data)
-		outputstr = "\"%s\", %f, %f\n" % (image, llstr[0], llstr[1]) 
-		outfile.write(outputstr)
+		if "GPSInfo" in exif_data:
+			llstr = get_lat_lon(exif_data)
+			outputstr = "\"%s\", %f, %f\n" % (image, llstr[0], llstr[1]) 
+			outfile.write(outputstr)
 	outfile.close()
