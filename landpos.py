@@ -19,6 +19,11 @@ from arcpy import management as DM
 import arcpy
 from arcpy.sa import *
 arcpy.env.workspace = os.getcwd()
+
+gap = 1
+start = 1
+
+
 class LicenseError(Exception):
     pass
 try:
@@ -52,9 +57,7 @@ if not(arcpy.Exists(demname)):
 cellsizeres = DM.GetRasterProperties(demname, "CELLSIZEX")
 cellsize = cellsizeres.getOutput(0)
 print "Using dem = " + demname + " and search radius = " + str(num) + " for cellsize = " + str(cellsize) + "."
-
-for i in range(num):
-	j = i + 1
+for j in range(start,num + 1, gap):
 	focalmean = FocalStatistics(demname,NbrAnnulus(j, j, "CELL"), "MEAN", "NODATA")
 	tempres = Minus(arcpy.sa.Float(focalmean), arcpy.sa.Float(Raster(demname)))
 	weight = float(j) * float(cellsize)
