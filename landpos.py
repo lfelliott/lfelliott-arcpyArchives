@@ -57,12 +57,17 @@ if not(arcpy.Exists(demname)):
 cellsizeres = DM.GetRasterProperties(demname, "CELLSIZEX")
 cellsize = cellsizeres.getOutput(0)
 print "Using dem = " + demname + " and search radius = " + str(num) + " for cellsize = " + str(cellsize) + "."
+landpos_divisor = num / gap
 for j in range(start,num + 1, gap):
-	focalmean = FocalStatistics(demname,NbrAnnulus(j, j, "CELL"), "MEAN", "NODATA")
+	print "annulus at " + str(j) + " cells"
+	# Uncomment below line to allow annulus to be great than 1 cell
+	# annulus_widgth = gap - 1
+	annulus_width = 0
+	focalmean = FocalStatistics(demname,NbrAnnulus(j, j + annulus_width, "CELL"), "MEAN", "NODATA")
 	tempres = Minus(arcpy.sa.Float(focalmean), arcpy.sa.Float(Raster(demname)))
 	weight = float(j) * float(cellsize)
 	elevres = Divide(arcpy.sa.Float(tempres), weight)
-	if j == 1: elev = elevres
+	if j == start: elev = elevres
 	else: elev = Plus(elev, elevres)
 landpos = Divide(elev, float(num))
 landposname = "landpos"
