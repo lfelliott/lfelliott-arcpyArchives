@@ -12,5 +12,5 @@ for fname in filelist:
 	newname = newname.replace(', 2', '_2')
 	newname = newname.replace(' ', '_')
 	os.rename(fname, newname)	
-	outfile.write("\"%s\", %s\n" % (fname, newname))
+	outfile.write("\"%s\",%s\n" % (fname, newname))
 	
