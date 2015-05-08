@@ -20,8 +20,13 @@ lyr = arcpy.mapping.ListLayers(mxd, layername)[0]
 print "Working on: " + layername
 
 if lyr.symbologyType == "UNIQUE_VALUES":
-	lyr.symbology.valueField = valfld
-	lyr.symbology.addAllValues()
+	print "If you add all values it clears the colors you've made for the layer, but to add labels, there needs to "
+	print "be a label for each value. So all values need to be represented in the layer. "
+	print "Do you want to add all values? (y,n)"
+	addvalues = raw_input()
+	if upcase(addvalues) == 'Y':
+		lyr.symbology.valueField = valfld
+		lyr.symbology.addAllValues()
 else:
 	print "Error: Layer must be of type Unique Values"
 	exit()
