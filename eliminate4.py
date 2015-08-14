@@ -23,11 +23,12 @@ def elapsed_time(t0):
 	m,s = divmod(rsecs,60)
 	return zfill(h,2) + ":" + zfill(m,2) + ":" + zfill(s,2)
 
-#i = 0
+i = 0
 #if (i == 0):
 DM.CopyFeatures(preliminary_fc, "pais_temp1")	
 starttime = time()
 for id in ids:
+	i += 1
 	processtime = time()
 	sqlstr = "ID = %d" % (id)
 	in_fc = "pais_temp1"
@@ -45,7 +46,7 @@ for id in ids:
 	DM.CopyFeatures(elim_out, "pais_temp1")
 	DM.Delete(elim_out)
 	print elapsed_time(processtime)
-	print "Done with %d of 15" % (i + 1)
+	print "Done with %d of %d" % (i, len(ids))
 	
 print elapsed_time(starttime)
 DM.CopyFeatures("pais_temp1", output_fc)
